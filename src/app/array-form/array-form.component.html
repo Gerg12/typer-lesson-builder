@@ -1,0 +1,125 @@
+<form [formGroup]="myForm" [hidden]="success" (ngSubmit)="submitHandler()">
+
+    Value: <pre>{{ myForm.value | json }}</pre>
+
+    <hr>
+
+    <mat-form-field class="full">
+        <input matInput placeholder="Title" formControlName="title">
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+      <mat-label>Category</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let category of categories" [value]="category">
+          {{category}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+      <mat-label>Difficulty</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let difficulty of difficulties" [value]="difficulty">
+          {{difficulty}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- <div formArrayName="phones">
+
+        <div *ngFor="let phone of phoneForms.controls; let i=index" [formGroupName]="i">
+
+
+            <mat-form-field class="xs">
+                <input matInput placeholder="area" formControlName="area">
+            </mat-form-field>
+
+            <mat-form-field class="xs">
+                <input matInput placeholder="prefix" formControlName="prefix">
+            </mat-form-field>
+
+            <mat-form-field class="sm">
+                <input matInput placeholder="line" formControlName="line">
+            </mat-form-field>
+
+            <button mat-raised-button color="warn" (click)="deletePhone()">Delete</button>
+
+        </div>
+
+    </div>
+
+    <button mat-raised-button color="primary" (click)="addPhone()" type="button">Add Phone Number</button> -->
+
+    <div formArrayName="steps">
+
+        <div *ngFor="let step of stepForms.controls; let i=index" [formGroupName]="i">
+
+
+            <mat-form-field>
+              <mat-label>Type</mat-label>
+              <mat-select formControlName="type">
+                <mat-option 
+                  *ngFor="let type of types" 
+                  [value]="type">
+                    {{type}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <br>
+
+            <mat-form-field class="xs">
+                <input matInput 
+                  placeholder="Description" 
+                  formControlName="desc">
+            </mat-form-field>
+
+            <br>
+
+            <mat-form-field style="width: 300px;">
+              <mat-label>Steps</mat-label>
+              <textarea matInput 
+                rows="5" 
+                cols="40" 
+                placeholder="text"
+                formControlName="action"
+                >
+              </textarea>
+          </mat-form-field>
+          <!-- <button mat-raised-button
+            color="primary" 
+            (click)="addAction()"
+            type="button">
+              Add Action
+          </button>
+
+          <br> -->
+
+          <button mat-raised-button 
+            color="warn" 
+            (click)="deleteStep()"
+            type="button">
+              Delete
+          </button>
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <button mat-raised-button color="primary" (click)="addStep()" type="button">Add Step</button>
+
+    <button mat-button color="primary" type="submit" [disabled]="myForm.invalid">Submit Form</button>
+
+
+</form>
+
+<div *ngIf="success" class="notification is-success">
+  Yay! We received your submission
+</div>
